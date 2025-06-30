@@ -9,7 +9,14 @@ import SwiftUI
 
 struct ViewAllLists: View {
     var body: some View {
-        TimedListGroup()
+        NavigationSplitView {
+            List {
+                TimedListGroup(time:"1:00")
+                TimedListGroup(time:"2:00")
+            }.navigationTitle("My ReminderLists")
+        } detail: {
+            Text("Please choose a list.")
+        }
     }
 }
 
