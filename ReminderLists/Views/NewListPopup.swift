@@ -8,21 +8,51 @@
 import SwiftUI
 
 struct NewListPopup: View {
-    @State private var name = ""
-    @State private var selectedTime = Date()
+    @State private var newListName = ""
+    @State private var newListTime = Date()
+    @StateObject var timedLists = TimedListsModel()
+    @Binding var addPopupEnabled: Bool
+    
     var body: some View {
         VStack {
             Text("New List").foregroundColor(.black).font(.largeTitle).fontWeight(.bold)
-            HStack {
-                Text("Name:")
-                TextField("Enter name here", text: $name)
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Name:")
+                    TextField("Enter name here", text: $newListName).frame(maxWidth:200)
+                }
+                HStack {
+                    Text("Time: ")
+                    DatePicker(
+                        "",
+                        selection: $newListTime,
+                        displayedComponents: [.hourAndMinute]
+                    ).labelsHidden()
+                }
             }
             HStack {
-                DatePicker(
-                    "Time:",
-                    selection: $selectedTime,
-                    displayedComponents: [.hourAndMinute]
-                )
+                Button(action: {
+                    addPopupEnabled.toggle()
+                }) {
+                    Text("Cancel")
+                        .padding()
+                        .foregroundColor(.red)
+                        .cornerRadius(10)
+                }
+                Button(action: {
+                    if !newListName.isEmpty {
+                        timedLists.addList(name: newListName, time: newListTime)
+                        newListName = ""
+                        newListTime = Date()
+                        addPopupEnabled.toggle()
+                    }
+                }) {
+                    Text("Add List")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(.blue)
+                        .cornerRadius(10)
+                }
             }
             
             
@@ -36,5 +66,5 @@ struct NewListPopup: View {
 }
 
 #Preview {
-    NewListPopup()
+
 }
