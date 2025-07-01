@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ViewAllLists: View {
-    @State private var showNewListPopup = false
+    @State private var addPopupEnabled = false
     var body: some View {
         NavigationSplitView {
             ZStack {
@@ -17,17 +17,16 @@ struct ViewAllLists: View {
                         TimedListGroup(time:"1:00")
                         TimedListGroup(time:"2:00")
                     }.navigationTitle("My ReminderLists")
-                    AddButton()
-                }
-                if showNewListPopup {
+                    AddButton(addPopupEnabled: $addPopupEnabled)
+                    }
+                if addPopupEnabled {
                     Color.black.opacity(0.3)
                         .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
-                            showNewListPopup = false
+                            addPopupEnabled = false
                         }
                     NewListPopup()
                         .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
-                        
                 }
             }
         } detail: {
