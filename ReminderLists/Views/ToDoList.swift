@@ -37,7 +37,7 @@ struct ToDoList: View {
                     }.onDelete(perform: viewModel.deleteTask)
                 }
             }
-        }.navigationTitle("To-DoList")
+        }.navigationTitle("List")
     }
 }
 

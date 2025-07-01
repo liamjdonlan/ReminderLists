@@ -10,7 +10,7 @@ import SwiftUI
 struct NewListPopup: View {
     @State private var newListName = ""
     @State private var newListTime = Date()
-    @StateObject var timedLists = TimedListsModel()
+    @ObservedObject var timedLists: TimedListsModel;
     @Binding var addPopupEnabled: Bool
     
     var body: some View {

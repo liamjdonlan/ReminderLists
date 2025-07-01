@@ -7,16 +7,29 @@
 
 import SwiftUI
 
+
 struct ViewAllLists: View {
+   
     @State private var addPopupEnabled = false
+    @StateObject private var timedLists = TimedListsModel()
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        return formatter
+    }
+    
+    
     
     var body: some View {
         NavigationSplitView {
             ZStack {
                 ZStack(alignment: .bottomTrailing) {
+                    
                     List {
-                        TimedListGroup(time:"1:00")
-                        TimedListGroup(time:"2:00")
+                        ForEach(timedLists.lists) { toDolist in
+                            TimedListGroup(time:dateFormatter.string(from: toDolist.time), name:toDolist.name)
+                        }
                     }.navigationTitle("My ReminderLists")
                     AddButton(addPopupEnabled: $addPopupEnabled)
                 }
@@ -26,7 +39,7 @@ struct ViewAllLists: View {
                         .onTapGesture {
                             addPopupEnabled = false
                         }
-                    NewListPopup(addPopupEnabled: $addPopupEnabled)
+                    NewListPopup(timedLists: timedLists, addPopupEnabled: $addPopupEnabled)
                 }
             }
         } detail: {

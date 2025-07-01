@@ -9,18 +9,19 @@ import SwiftUI
 
 struct TimedListGroup: View {
     var time: String;
+    var name: String;
     
     var body: some View {
         Section (header: Text(time).font(.largeTitle).foregroundColor(.black)){
             NavigationLink {
                 ToDoList()
             } label: {
-                Text("List 1")
+                Text(name)
             }
         }
     }
 }
 
 #Preview {
-    TimedListGroup(time:"12:00")
+    TimedListGroup(time:"12:00", name:"List 1")
 }
