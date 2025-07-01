@@ -10,11 +10,12 @@ import SwiftUI
 struct TimedListGroup: View {
     var time: String;
     var name: String;
+    @ObservedObject var tasks: TaskViewModel;
     
     var body: some View {
         Section (header: Text(time).font(.largeTitle).foregroundColor(.black)){
             NavigationLink {
-                ToDoList()
+                ToDoList(viewModel: tasks)
             } label: {
                 Text(name)
             }
@@ -23,5 +24,5 @@ struct TimedListGroup: View {
 }
 
 #Preview {
-    TimedListGroup(time:"12:00", name:"List 1")
+    TimedListGroup(time:"12:00", name:"List 1", tasks:TaskViewModel())
 }

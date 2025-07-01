@@ -11,4 +11,5 @@ struct TimedList: Identifiable {
     let id = UUID()
     var name: String
     var time: Date
+    var tasks: TaskViewModel
 }

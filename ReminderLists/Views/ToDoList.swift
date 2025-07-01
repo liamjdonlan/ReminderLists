@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ToDoList: View {
-    @StateObject private var viewModel = TaskViewModel()
+    @ObservedObject var viewModel: TaskViewModel
     @State private var newTaskTitle = ""
     
     
@@ -42,5 +42,4 @@ struct ToDoList: View {
 }
 
 #Preview {
-    ToDoList()
 }

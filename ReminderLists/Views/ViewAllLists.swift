@@ -28,7 +28,7 @@ struct ViewAllLists: View {
                     
                     List {
                         ForEach(timedLists.lists) { toDolist in
-                            TimedListGroup(time:dateFormatter.string(from: toDolist.time), name:toDolist.name)
+                            TimedListGroup(time:dateFormatter.string(from: toDolist.time), name:toDolist.name, tasks: toDolist.tasks)
                         }
                     }.navigationTitle("My ReminderLists")
                     AddButton(addPopupEnabled: $addPopupEnabled)
